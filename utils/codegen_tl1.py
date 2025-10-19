@@ -120,7 +120,7 @@ inline void lut_ctor(int8_t* qlut, bitnet_float_type* b, bitnet_float_type* lut_
         tbl_mask[14] = 13;\n\
         tbl_mask[15] = 15;\n\
         uint8x16_t tbl_mask_q = vld1q_u8(tbl_mask);\n\
-#pragma unroll\n\
+//#pragma unroll\n\
     for (int k = 0; k < act_k / 16; ++k) {{\n\
         float32x4x2_t vec_bs_x0 = vld2q_f32(b + k * 16);\n\
         float32x4x2_t vec_bs_x1 = vld2q_f32(b + k * 16 + 8);\n\
@@ -159,7 +159,7 @@ inline void lut_ctor(int8_t* qlut, bitnet_float_type* b, bitnet_float_type* lut_
                       &(vec_lut[4]), &(vec_lut[5]), &(vec_lut[6]), &(vec_lut[7]));\n\
         Transpose_8_8(&(vec_lut[8]), &(vec_lut[9]), &(vec_lut[10]), &(vec_lut[11]),\n\
                       &(vec_lut[12]), &(vec_lut[13]), &(vec_lut[14]), &(vec_lut[15]));\n\
-#pragma unroll\n\
+//#pragma unroll\n\
         for (int idx = 0; idx < 8; idx++) {{\n\
             int8x16_t q0_s = vqtbl1q_s8(vreinterpretq_s8_s16(vec_lut[idx]), tbl_mask_q);\n\
             int8x8_t q0_low = vget_low_s8(q0_s);\n\
